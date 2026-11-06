@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas | PetMatch Mini</title>
+</head>
+<body>
+    <main>
+        <h1>Catálogo de mascotas</h1>
+        <p>Conoce las mascotas registradas en este ejemplo.</p>
+
+        <section th:if="${pets.isEmpty()}">
+            <h2>El catálogo está vacío</h2>
+            <p>Vuelve cuando haya mascotas para mostrar.</p>
+        </section>
+
+        <section th:unless="${pets.isEmpty()}" aria-label="Lista de mascotas">
+            <article th:each="pet : ${pets}">
+                <h2 th:text="${pet.name}">Nombre de la mascota</h2>
+                <p>Especie: <span th:text="${pet.species}">Especie</span></p>
+                <p>Edad: <span th:text="${pet.age}">0</span> años</p>
+                <a th:href="@{/pets/{id}(id=${pet.id})}" href="#">Ver detalle</a>
+            </article>
+        </section>
+
+        <a th:href="@{/}" href="/">Volver al inicio</a>
+    </main>
+</body>
+</html>
